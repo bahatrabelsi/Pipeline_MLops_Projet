@@ -1,0 +1,4 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+name: iris-endpoint
+description: Endpoint d'inference temps reel pour le modele Iris
+auth_mode: key

@@ -1,0 +1,22 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: iris-rf-training
+experiment_name: iris-training-pipeline
+
+code: ../src
+command: >-
+  python train.py
+  --data ${{inputs.iris_data}}
+  --n_estimators ${{inputs.n_estimators}}
+
+inputs:
+  iris_data:
+    type: uri_file
+    path: azureml:iris-data:1      # data asset versionne (US 1.x)
+  n_estimators: 200
+
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+  conda_file: ../environment/conda.yaml
+
+compute: azureml:cpu-cluster      # cluster avec autoscaling 0->2 noeuds

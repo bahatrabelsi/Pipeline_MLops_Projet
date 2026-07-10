@@ -1,0 +1,12 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: green
+endpoint_name: iris-endpoint
+model: azureml:iris-model:2        # version Challenger
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+  conda_file: ../environment/conda.yaml
+code_configuration:
+  code: ../src
+  scoring_script: score.py
+instance_type: Standard_DS2_v2
+instance_count: 1
