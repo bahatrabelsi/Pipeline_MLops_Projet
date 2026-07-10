@@ -1,0 +1,26 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: iris-data-drift-check
+experiment_name: data-drift-monitoring
+
+code: ../src
+command: >-
+  python data_drift.py
+  --baseline ${{inputs.baseline}}
+  --current ${{inputs.current}}
+  --threshold ${{inputs.threshold}}
+
+inputs:
+  baseline:
+    type: uri_file
+    path: azureml:iris-data:1          # donnees de reference (entrainement)
+  current:
+    type: uri_file
+    path: azureml:iris-production:1    # donnees collectees en production
+  threshold: 0.25
+
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
+  conda_file: ../environment/conda.yaml
+
+compute: azureml:cpu-cluster

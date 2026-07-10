@@ -1,3 +1,10 @@
+"""
+Script d'entrainement du modele Iris (Random Forest).
+Compatible execution locale (VS Code) ET Azure ML Command Job.
+Le tracking MLflow est automatiquement relie a Azure ML quand le script
+tourne dans un job ; en local il ecrit dans ./mlruns.
+"""
+
 import argparse
 
 import pandas as pd

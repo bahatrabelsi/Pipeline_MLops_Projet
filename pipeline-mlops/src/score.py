@@ -1,3 +1,12 @@
+"""
+Script de scoring (inference) pour le Managed Online Endpoint Azure ML.
+- init() : appele UNE fois au demarrage du conteneur -> charge le modele.
+- run()  : appele a CHAQUE requete -> retourne les predictions.
+
+Gere proprement la conversion du payload JSON en DataFrame pandas
+(prevention du bug 3 : erreurs 400/500 dues a la serialisation).
+"""
+
 import os
 import json
 import logging
